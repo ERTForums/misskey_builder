@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY_IMAGE: misskey/misskey
+  REGISTRY_IMAGE: tuxium/misskey
   TAGS: |
     type=edge
     type=ref,event=pr
@@ -98,6 +98,9 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
+          echo ${{ secrets.DEFAULT_YML }} > .config/default.yml
+          echo ${{ secrets.DOCKER_ENV }} > .config/docker.env
+          echo ${{ secrets.COMPOSE_YML }} > compose.yml
           docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
             $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
       - name: Inspect image
