@@ -29,6 +29,7 @@ jobs:
     steps:
       - name: Prepare
         run: |
+          ls
           echo "${{ secrets.DEFAULT_YML }}" > .config/default.yml
           echo "${{ secrets.DOCKER_ENV }}" > .config/docker.env
           echo "${{ secrets.COMPOSE_YML }}" > compose.yml
