@@ -29,9 +29,9 @@ jobs:
     steps:
       - name: Prepare
         run: |
-          echo ${{ secrets.DEFAULT_YML }} > .config/default.yml
-          echo ${{ secrets.DOCKER_ENV }} > .config/docker.env
-          echo ${{ secrets.COMPOSE_YML }} > compose.yml
+          echo "${{ secrets.DEFAULT_YML }}" > .config/default.yml
+          echo "${{ secrets.DOCKER_ENV }}" > .config/docker.env
+          echo "${{ secrets.COMPOSE_YML }}" > compose.yml
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
       - name: Check out the repo
